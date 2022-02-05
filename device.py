@@ -28,6 +28,9 @@ def led_stream_handler(message):
 def main():
     #initialize the db with configuration and user data
     backend = Backend(config, email, firstname, lastname)
+    
+    #initialize device id to be called when clearing LEDs
+    device_id = backend.get_device_id()
 
     #initialize the LED values from database
     init_screen(backend)
@@ -41,7 +44,9 @@ def main():
 
     # to be implemented by students
     def clear_leds():
-        raise NotImplementedError("clear_leds should be implemented by students.")
+        for event in sense.stick.get_events():
+            if event.action == "pressed":
+                backend.clear_leds(device_id)
 
 if __name__ == '__main__':
     main()
