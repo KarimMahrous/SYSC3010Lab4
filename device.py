@@ -29,6 +29,9 @@ def main():
     #initialize the db with configuration and user data
     backend = Backend(config, email, firstname, lastname)
 
+     #initializing device_id to clear the device with joystick pressed
+    device_id = backend.get_device_id()
+
     #initialize the LED values from database
     init_screen(backend)
 
